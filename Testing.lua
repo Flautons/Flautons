@@ -4,7 +4,7 @@ botpass = "@redojelek123"  --BOT PASSWORD
 botlist = {"RedoKontolodon4"} --LIST BOT
 --~~~~~INFO WORLD~~~~~--
 worlds = {"OGZPZ"}
-Worldid = "GACORBOS"
+worldsid = "GACORBOS"
 blockid= 4584
 loop = true
 --~~~~~BUYING PACK~~~~~--
@@ -24,12 +24,13 @@ YourDiscordid= "888771508468580422"
 
 
 seedid = blockid+1
+
 function powershell(loglars)
   local script = [[
   $webhookUri = "]].. weebhook ..[["
     
   $Body = @{
-    'username' = 'Flauton Rotation Log V1'
+    'username' = 'Flauton Logs'
 
     'content' = ']].. loglars .."\n"..(os.date"Date= %d/%m/%Y").."     "..(os.date"Hour= %H:%M:%S)").."\n"..[[<@]].. YourDiscordid ..[[>'
     'avatar_url' = 'https://ibb.co/qDbTv7W'
@@ -54,6 +55,9 @@ function getban()
     end
     powershell("Bot name = "..botname.." Success Banned Player '..names")
   end
+
+
+function back() 
 
 
 function main(bekleme)
@@ -92,9 +96,12 @@ function main(bekleme)
       sleep(15000)
       say("`2Script Running `9Flauton#1410")
       sleep(2000)
+      say("/love") 
+      sleep(2000) 
       move(-3,0)
       sleep(5000)
     end
+    
     local function idliworldegirici(totTxt,Worldid)
       sendPacket(3,"action|join_request\nname|" .. totTxt.."|"..Worldid)
       sleep(15000)
@@ -118,7 +125,9 @@ function main(bekleme)
           powershell("Bot name = "..botname.." Reconnected")
           sleep(10000)
           worldegirici(worlds[i])
-          sleep(5000)
+          sleep(10000)
+          idliworldegirici(worlds[i],worldsid)
+          sleep(5000) 
           findPath(pozisyonx,pozisyony)
           sleep(1000)
         end
@@ -142,6 +151,8 @@ function main(bekleme)
           powershell("Bot name = "..botname.." Reconnected")
           sleep(10000)
           worldegirici(worlds[i])
+          sleep(10000) 
+          idliworldegirici(worlds[i],worldsid)
           sleep(5000)
           findPath(pozisyonx,pozisyony)
           sleep(1000)
@@ -152,7 +163,7 @@ function main(bekleme)
     end
     local function ekici()
       for _, tile in pairs(getTiles()) do
-        if tile.fg ~= 0 and tile.y >1 and findItem(seedid) > 0 and getTile(tile.x, tile.y -1).fg == 0 and getTile(tile.x, tile.y).fg ~= seedid and getTile(tile.x, tile.y).fg ~= seedid-1 and getTile(tile.x-2, tile.y -1).fg ~= 6 and getTile(tile.x+2, tile.y -1).fg ~= 6 then
+        if tile.fg ~= 0 and tile.y >1 and findItem(seedid) > 0 and getTile(tile.x, tile.y -1).fg == 0 and getTile(tile.x, tile.y).fg ~= seedid and getTile(tile.x, tile.y).fg ~= blockid and getTile(tile.x-2, tile.y -1).fg ~= 6 and getTile(tile.x+2, tile.y -1).fg ~= 6 then
           findPath(tile.x, tile.y-1)
           sleep(50)
           while getTile(tile.x, tile.y-1).fg == 0 do
@@ -167,6 +178,8 @@ function main(bekleme)
               powershell("Bot name = "..botname.." Reconnected")
               sleep(10000)
               worldegirici(worlds[i])
+              sleep(10000) 
+              idliworldegirici(worlds[i],worldsid)
               sleep(5000)
             end
           end
@@ -199,6 +212,8 @@ function main(bekleme)
             powershell("Bot name = "..botname.." Reconnected")
             sleep(10000)
             worldegirici(worlds[i])
+            sleep(10000) 
+            idliworldegirici(worlds[i],worldsid)
             sleep(5000)
             findPath(tile.x-1,tile.y)
             sleep(1000)
@@ -274,10 +289,12 @@ function main(bekleme)
         end
       end
       worldegirici(worlds[i])
+      sleep(10000) 
+      idliworldegirici(worlds[i],worldsid)
     end
     local function toplayici()
       for _, tile in pairs(getTiles()) do
-        if tile.fg == seedid and findItem(seedid-1) < 150 then
+        if tile.fg == seedid and findItem(blockid) < 150 then
           if getTile(tile.x, tile.y).ready then
             findPath(tile.x, tile.y)
             sleep(50)
@@ -294,6 +311,8 @@ function main(bekleme)
                 powershell("Bot name = "..botname.." Reconnected")
                 sleep(10000)
                 worldegirici(worlds[i])
+                sleep(10000) 
+                idliworldegirici(worlds[i],worldsid)
                 sleep(5000)
                 findPath(tile.x,tile.y)
                 sleep(1000)
@@ -338,8 +357,8 @@ function main(bekleme)
         local pozisyonx = math.floor(getposx() /32)
         local pozisyony = math.floor(getposy() /32)
 
-        while findItem(seedid-1) > 0 do
-          breakzz(seedid-1,pozisyonx, pozisyony)
+        while findItem(blockid) > 0 do
+          breakzz(blockid,pozisyonx, pozisyony)
         end
 
         while ekici() do
@@ -356,8 +375,8 @@ function main(bekleme)
         local pozisyonx1 = math.floor(getposx() /32)
         local pozisyony1 = math.floor(getposy() /32)
 
-        while findItem(seedid-1) > 0 do
-          breakzz(seedid-1,pozisyonx1, pozisyony1)
+        while findItem(blockid) > 0 do
+          breakzz(blockid,pozisyonx1, pozisyony1)
         end
 
         while ekici() do
@@ -395,7 +414,7 @@ local n=0
 for i= 1, #botlist do
   n=n+1
   if n == #botlist then
-    powershell("Bot name = "..botname.."  This account name Does not match the one in the botlist. If you think something is wrong contact with creator. https://discord.gg/tHNYnqYa8G")
+    powershell("Bot name = "..botname.."  This account name Does not match the one in the botlist. If you think something is wrong contact with creator. https://discord.gg/flauton")
   end
 
   if botname == botlist[i] then
@@ -413,6 +432,16 @@ for i= 1, #botlist do
       powershell("Bot name = "..botname.." Reconnected")
       sleep(10000)
     end
+    
+    if ban == true then
+      while true do
+        getban() 
+        sleep(2000)
+      end
+    end
+    
+    if ban == false then
+      NULL
 
     if loop == true then
       while true do
@@ -428,7 +457,7 @@ for i= 1, #botlist do
       sleep(2000)
       removeBot(botname)
       sleep(5000)
-      powershell("Bot name = "..botname.." The worlds are over, the bot has been removed")
+      powershell("Bot name = "..botname.." The worlds are over, the bot has been removed, Tanks Use Script Rotation Flauton#1410")
       sleep(10000)
     end
   end
